@@ -1,16 +1,28 @@
 import { Routes, Route } from "react-router-dom";
-import LandingPage from "./Component/LandingPage";
-import LoginPage from "./Pages/Login";
-import RegisterPage from "./Pages/Register";
+import Login from "./assets/auth/Login";
+import Register from "./assets/auth/Register";
+import Dashboard from "./Component/Dashboard";
+import Editdata from "./Pages/Editdata";
+import Input from "./Pages/input";
+import Tambahdata from "./Pages/Tambahdata";
+import LandingPage from "./Component/landingpage";
+import Profile from "./Component/Profile";
+import Sidnav from "./Component/Sidnav";
+import TabelData from "./Pages/Tabeldata";
 
-function App() {     
+function App() {
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />}/>
-      <Route path="/login" element={<LoginPage />}/>
-      <Route path="/register" element={<RegisterPage />}/>
-      {/* <Route path="/halaman" element={<LandingPage />}/>
-      <Route path="/halaman" element={<LandingPage />}/> */}
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/sidnav" element={<Sidnav />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/editdata" element={<Editdata />} />
+      <Route path="/input" element={<Input />} />
+      <Route path="/tabeldata" element={<TabelData />} />
+      <Route path="/tambahdata" element={<Tambahdata />} />
     </Routes>
   );
 }
