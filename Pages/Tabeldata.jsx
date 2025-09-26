@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const Tabeldata = () => {
   const [data, setData] = useState([
-    { id: 1, makanan: 'nasi goreng babat', paket: 'paket 1', harga: 15.000 },
+    { id: 1, makanan: 'nasi goreng babat', paket: 'paket 1', harga: 15000 },
   ]);
 
   const tambahData = () => {
@@ -62,7 +62,8 @@ const Tabeldata = () => {
                   className="bg-gray-800 text-white px-2 py-1 rounded"
                   title="Edit"
                 >
-                  ✏️
+                  ✏️ 
+                  <th style={{ padding: 10, border: '1px solid #ddd' }}>Edit tulisan</th>
                 </button>
                 <button 
                   onClick={() => hapusData(item.id)} 
@@ -70,6 +71,7 @@ const Tabeldata = () => {
                   title="Hapus"
                 >
                   🗑️🚮
+                  <th style={{ padding: 10, border: '1px solid #ddd' }}>Hapus</th>
                 </button>
               </td>
             </tr>
