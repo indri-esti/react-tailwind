@@ -1,92 +1,110 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
-export default function Login() {
+const Login = () => {
   const [fullName, setFullName] = useState("");
-  const [gmailAccount, setGmailAccount] = useState("");
+  const [gmail, setGmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Add your login logic here
-    alert(`Login submitted:\nNama Lengkap: ${fullName}\nAkun Gmail: ${gmailAccount}`);
-  };
 
-  const handleReset = () => {
-    setFullName("");
-    setGmailAccount("");
-    setPassword("");
+    // validasi sederhana
+    if (!fullName || !gmail || !password) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Semua field harus diisi!",
+      });
+      return;
+    }
+
+    // jika validasi OK
+    Swal.fire({
+      icon: "success",
+      title: "Berhasil!",
+      text: "Data berhasil diupdate!",
+    });
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-4">
-      <div className="w-full max-w-md bg-muted p-8 rounded-md shadow-md">
-        <h2 className="text-center text-primary text-xl font-semibold mb-6">Login</h2>
-        <form onSubmit={handleLogin} className="space-y-5">
-          <div className="flex flex-col">
-            <label htmlFor="fullName" className="mb-1 text-muted-foreground text-sm">
-              Nama Lengkap
-            </label>
-            <input
-              id="fullName"
-              type="text"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              placeholder="Masukkan nama lengkap Anda"
-              className="border border-border rounded px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-              required
-              autoComplete="name"
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label htmlFor="gmailAccount" className="mb-1 text-muted-foreground text-sm">
-              Akun Gmail
-            </label>
-            <input
-              id="gmailAccount"
-              type="email"
-              value={gmailAccount}
-              onChange={(e) => setGmailAccount(e.target.value)}
-              placeholder="Masukkan akun Gmail Anda"
-              className="border border-border rounded px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-              required
-              autoComplete="email"
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label htmlFor="password" className="mb-1 text-muted-foreground text-sm">
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Masukkan password Anda"
-              className="border border-border rounded px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
-              required
-              autoComplete="current-password"
-            />
-          </div>
-
-          <div className="flex justify-between">
-            <button
-              type="submit"
-              className="bg-primary text-background px-4 py-2 rounded hover:bg-primary/90 transition"
-            >
-              Login
-            </button>
-            <button
-              type="button"
-              onClick={handleReset}
-              className="bg-muted hover:bg-muted/80 text-muted-foreground px-4 py-2 rounded transition"
-            >
-              Reset
-            </button>
-          </div>
-        </form>
-      </div>
+    <div style={styles.container}>
+      <form onSubmit={handleLogin} style={styles.form}>
+        <h1 style={{ textAlign: 'center' }}>Login</h1>
+        
+        <label>
+          Nama Lengkap
+          <input
+            type="text"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            placeholder="Nama Lengkap"
+            style={styles.input}
+          />
+        </label>
+        <label>
+          Gmail
+          <input
+            type="email"
+            value={gmail}
+            onChange={(e) => setGmail(e.target.value)}
+            placeholder="akun@gmail.com"
+            style={styles.input}
+          />
+        </label>
+        <label>
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            style={styles.input}
+          />
+        </label>
+        <button type="submit" style={styles.button}>
+          Login
+        </button>
+      </form>
     </div>
   );
-}
+};
+
+const styles = {
+  container: {
+    height: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f8f8f8",
+  },
+  form: {
+    backgroundColor: "#fff",
+    padding: 20,
+    borderRadius: 8,
+    boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+    minWidth: 300,
+    display: "flex",
+    flexDirection: "column",
+    gap: 15,
+  },
+  input: {
+    width: "100%",
+    padding: 8,
+    marginTop: 5,
+    borderRadius: 4,
+    border: "1px solid #ccc",
+    fontSize: 16,
+  },
+  button: {
+    padding: 10,
+    backgroundColor: "#06b6d4",
+    color: "#fff",
+    border: "none",
+    borderRadius: 5,
+    cursor: "pointer",
+    fontWeight: "bold",
+  },
+};
+
+export default Login;

@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./assets/auth/Login";
 import Register from "./assets/auth/Register";
 import Dashboard from "./Component/Dashboard";
+import Dataiswa from "./Component/Datasiswa";
 import Editdata from "./Pages/Editdata";
 import Input from "./Pages/input";
 import Tambahdata from "./Pages/Tambahdata";
@@ -19,6 +20,7 @@ function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/register" element={<Register />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/data-siswa" element={<Dataiswa />} />
       <Route path="/editdata" element={<Editdata />} />
       <Route path="/input" element={<Input />} />
       <Route path="/tabeldata" element={<TabelData />} />

@@ -1,92 +1,104 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-//diketik kaya kemarin 
-function RegisterPage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+import React, { useState } from "react";
+import Swal from "sweetalert2";
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-  
-  const handleSubmit = (e) => {
+const Register = () => {
+  const [namaLengkap, setNamaLengkap] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleDaftar = (e) => {
     e.preventDefault();
-    console.log('Register data:', formData);
-    alert('Simulasi Pendaftaran Berhasil!');
+
+    if(!namaLengkap || !email || !password){
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        text: "Semua wajib diisi!",
+      });
+      return;
+    }
+
+    // Contoh validasi email sederhana
+    const emailRegex =/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailRegex.test(email)){
+      Swal.fire({
+        icon: "error",
+        title: "Email tidak valid",
+        text: "Masukkan email yang benar",
+      });
+      return;
+    }
+
+    // Logika daftar atau API call bisa ditambahkan di sini
+
+    Swal.fire({
+      icon: "success",
+      title: "Berhasil Daftar",
+    });
+
+    // Reset form
+    setNamaLengkap("");
+    setEmail("");
+    setPassword("");
+  };
+
+  const handleMasuk = () => {
+    // Logic pindah ke halaman login bisa ditambahkan di sini, misal route ke /login
+    Swal.fire({
+      icon: "info",
+      title: "Halaman Masuk",
+      text: "Fungsi pindah ke halaman masuk belum ditambahkan.",
+    });
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
-        <h1 className="text-2xl font-bold text-center mb-6">Register</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-              Nama
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
-              leading-tight focus:outline-none focus:shadow-outline"
-              id="name"
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Masukkan nama Anda"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-              Email
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
-               leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Masukkan email Anda"
-              required
-            />
-          </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-              Password
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Buat password Anda"
-              required
-            />
-          </div>
-          <div className="flex items-center justify-between">
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded 
-              focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              Daftar
-            </button>
-            <Link to="/login" className="inline-block align-baseline font-bold text-sm
-             text-blue-500 hover:text-blue-800">
-              Sudah punya akun? Masuk
-            </Link>
-          </div>
-        </form>
-      </div>
+    <div style={{width:"300px", margin:"50px auto"}}>
+      <h3 style={{textAlign:"center", marginBottom:"20px"}}>Daftar</h3>
+      <form onSubmit={handleDaftar}>
+        <label htmlFor="namaLengkap">Nama Lengkap</label>
+        <input
+          type="text"
+          id="namaLengkap"
+          value={namaLengkap}
+          onChange={(e) => setNamaLengkap(e.target.value)}
+          placeholder="Masukkan nama lengkap"
+          style={{width:"100%", marginBottom:"10px", padding:"8px"}}
+        />
+        <label htmlFor="email">Gmail</label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Masukkan email"
+          style={{width:"100%", marginBottom:"10px", padding:"8px"}}
+        />
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Masukkan password"
+          style={{width:"100%", marginBottom:"20px", padding:"8px"}}
+        />
+
+        <button 
+          type="submit" 
+          style={{backgroundColor:"#22c55e", color:"white", padding:"10px 15px", border:"none", cursor:"pointer"}}
+        >
+          Daftar
+        </button>
+        <button 
+          type="button" 
+          onClick={handleMasuk}
+          style={{marginLeft:"10px", backgroundColor:"#6b7280", color:"white", padding:"10px 15px", border:"none", cursor:"pointer"}}
+        >
+          Sudah punya akun? Masuk
+        </button>
+      </form>
     </div>
   );
-}
+};
 
-export default RegisterPage;
+export default Register;
