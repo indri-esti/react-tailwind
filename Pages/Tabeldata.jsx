@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Swal from "sweetalert2";
 
 const Tabeldata = () => {
   const [data, setData] = useState([
